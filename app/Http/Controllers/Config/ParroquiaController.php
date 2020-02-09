@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Config;
 
-use App\Http\Controllers\Controller;
+use App\Parroquia;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ParroquiaRequest;
+use App\Municipio;
+
 
 class ParroquiaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:config.parroquia.create')->only(['create', 'store']);
+        $this->middleware('can:config.parroquia.index')->only(['index']);
+        $this->middleware('can:config.parroquia.edit')->only(['edit', 'update']);
+        $this->middleware('can:config.parroquia.show')->only(['show']);
+        $this->middleware('can:config.parroquia.destroy')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,7 @@ class ParroquiaController extends Controller
      */
     public function index()
     {
-        //
+        return view('config.parroquia.index');
     }
 
     /**
@@ -24,7 +36,12 @@ class ParroquiaController extends Controller
      */
     public function create()
     {
-        //
+        $municipio = Municipio::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+
+        return view('config.parroquia.create', compact('municipio'),[
+            'parroquia' => new Parroquia
+
+        ]);
     }
 
     /**
@@ -33,53 +50,54 @@ class ParroquiaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ParroquiaRequest $request)
     {
-        //
-    }
+        $parroquia = Parroquia::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('parroquia.index')
+            ->with('success', 'Parroquia guardado con éxito.');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Parroquia  $parroquia
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $municipio = Municipio::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        $parroquia = Parroquia::find($id);
+
+        return view('config.parroquia.edit', compact('parroquia','municipio'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Parroquia  $parroquia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ParroquiaRequest $request, $id)
     {
-        //
+        $parroquia = Parroquia::find($id);
+
+        $parroquia->fill($request->all())->save();
+
+        return redirect()->route('parroquia.index')
+            ->with('success', 'Parroquia actualizado con éxito');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Parroquia  $parroquia
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $parroquia = Parroquia::find($id)->delete();
+        return back()->with('success', 'Parroquia eliminado con exito');
     }
 }

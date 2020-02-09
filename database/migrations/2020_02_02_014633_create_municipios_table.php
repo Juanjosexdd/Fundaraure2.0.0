@@ -20,7 +20,7 @@ class CreateMunicipiosTable extends Migration
 	        $table->string('nombre', 30);
             $table->string('abreviado', 10);
             $table->unsignedBigInteger('codestado');
-            $table->unsignedTinyInteger('estatus')->default(1);
+            $table->enum('estatus', ['Activo','Inactivo'])->defaul('Activo');
 
 
             $table->timestamps();

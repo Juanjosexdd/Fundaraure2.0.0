@@ -115,7 +115,20 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <!-- <li class="nav-header"> NAVEGACIÓN PRINCIPAL</li> -->
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview
+            {{ setActive('cliente.index')}}
+            {{ setActive('cliente.edit')}}
+            {{ setActive('cliente.create')}}
+            {{ setActive('efactura.index')}}
+            {{ setActive('efactura.edit')}}
+            {{ setActive('efactura.create')}}
+            {{ setActive('servicio.index')}}
+            {{ setActive('servicio.edit')}}
+            {{ setActive('servicio.create')}}
+            {{ setActive('fpago.index')}}
+            {{ setActive('fpago.edit')}}
+            {{ setActive('fpago.create')}}
+          ">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-globe-americas"></i>
               <p>
@@ -124,20 +137,48 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('facturacion.cliente.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link">
+                <a href="{{route('cliente.index')}}"
+                  class="nav-link
+                  {{ setActive('cliente.index')}}
+                  {{ setActive('cliente.edit')}}
+                  {{ setActive('cliente.create')}}                  
+                  ">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <p>Cliente</p>
+                  <span class="right badge badge-success">Nuevo</span>
+                </a>
+              </li>
+              @endcan
+              @can('facturacion.efactura.index')
+              <li class="nav-item">
+                <a href="{{route('efactura.index')}}"
+                  class="nav-link
+                  {{ setActive('efactura.index')}}
+                  {{ setActive('efactura.edit')}}
+                  {{ setActive('efactura.create')}}
+                  ">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Estatus Fatura</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
+              @can('facturacion.fpago.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link">
+                <a href="{{ route('fpago.index')}}"
+                  class="nav-link
+                  {{ setActive('fpago.index')}}
+                  {{ setActive('fpago.edit')}}
+                  {{ setActive('fpago.create')}}
+                  ">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Forma de Pago</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
               <li class="nav-item">
                 <a href=""
                   class="nav-link">
@@ -145,13 +186,20 @@
                   <p>Generar Factura</p>
                 </a>
               </li>
+              @can('facturacion.servicio.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link"></i>
+                <a href="{{route('servicio.index')}}"
+                  class="nav-link
+                  {{ setActive('servicio.index')}}
+                  {{ setActive('servicio.edit')}}
+                  {{ setActive('servicio.create')}}
+                  "></i>
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Servicios</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
             </ul>
           </li>
           <li class="nav-item">
@@ -162,7 +210,23 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview
+            {{ setActive('pais.index')}}
+            {{ setActive('pais.edit')}}
+            {{ setActive('pais.create')}}
+            {{ setActive('estado.index')}}
+            {{ setActive('estado.edit')}}
+            {{ setActive('estado.create')}}
+            {{ setActive('municipio.index')}}
+            {{ setActive('municipio.edit')}}
+            {{ setActive('municipio.create')}}
+            {{ setActive('parroquia.index')}}
+            {{ setActive('parroquia.edit')}}
+            {{ setActive('parroquia.create')}}
+            {{ setActive('sector.index')}}
+            {{ setActive('sector.edit')}}
+            {{ setActive('sector.create')}}
+            ">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-globe-americas"></i>
               <p>
@@ -171,52 +235,84 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('config.pais.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link">
+                <a href="{{ route('pais.index') }}"
+                  class="nav-link
+                  {{ setActive('pais.index')}}
+                  {{ setActive('pais.edit')}}
+                  {{ setActive('pais.create')}}">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>País</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
+              @can('config.estado.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link">
+                <a href="{{ route('estado.index') }}"
+                  class="nav-link
+                  {{ setActive('estado.index')}}
+                  {{ setActive('estado.edit')}}
+                  {{ setActive('estado.create')}}
+                  ">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Estado</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
+              @can('config.municipio.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link">
+                <a href="{{ route('municipio.index') }}"
+                  class="nav-link
+                  {{ setActive('municipio.index')}}
+                  {{ setActive('municipio.edit')}}
+                  {{ setActive('municipio.create')}}
+                  ">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Municipio</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
+              @can('config.parroquia.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link">
+                <a href="{{ route('parroquia.index')}}"
+                  class="nav-link
+                  {{ setActive('parroquia.index')}}
+                  {{ setActive('parroquia.edit')}}
+                  {{ setActive('parroquia.create')}}
+                  ">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Parroquia</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
+              @can('config.sector.index')
               <li class="nav-item">
-                <a href=""
-                  class="nav-link">
+                <a href="{{ route('sector.index') }}"
+                  class="nav-link
+                  {{ setActive('sector.index')}}
+                  {{ setActive('sector.edit')}}
+                  {{ setActive('sector.create')}}
+                  ">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Sector</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
+              @endcan
             </ul>
           </li>
           <li class="nav-item has-treeview
             {{ setActive('cargo.index')}}
             {{ setActive('cargo.edit')}}
             {{ setActive('cargo.create')}}
-            {{ setActive('cargo.show')}}
             {{ setActive('dpto.index')}}
             {{ setActive('dpto.edit')}}
             {{ setActive('dpto.create')}}
-            {{ setActive('dpto.show')}}
             {{ setActive('tcliente.index')}}
             {{ setActive('tcliente.edit')}}
             {{ setActive('tcliente.create')}}
@@ -229,7 +325,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            @can('cargo.index')
+              @can('config.cargo.index')
               <li class="nav-item">
                 <a href="{{ route('cargo.index' )}}"
                 class="nav-link
@@ -243,21 +339,21 @@
                 </a>
               </li>
               @endcan
-              @can('dpto.index')
+              @can('config.dpto.index')
               <li class="nav-item">
                 <a href="{{ route('dpto.index' )}}"
                   class="nav-link
                   {{ setActive('dpto.index')}}
                   {{ setActive('dpto.edit')}}
                   {{ setActive('dpto.create')}}
-                  {{ setActive('dpto.show')}}">
+                  ">
                   <i class="fa fa-building"></i>
                   <p>Departamentos</p>
                   <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
               @endcan
-              @can('empresa.index')
+              @can('config.empresa.index')
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fas fa-university"></i>
@@ -266,7 +362,7 @@
                 </a>
               </li>
               @endcan
-              @can('tcliente.index')
+              @can('config.tcliente.index')
               <li class="nav-item">
                 <a href="{{ route('tcliente.index' )}}" 
                   class="nav-link 
@@ -276,10 +372,10 @@
                     {{ setActive('tcliente.show')}}">
                   <i class="far fa-check-square"></i>
                   <p>Tipos de clientes</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
               @endcan
-              
             </ul>
           </li>
           <li class="nav-item has-treeview
@@ -310,6 +406,7 @@
                   ">
                   <i class="far fa-check-square"></i>
                   <p>Roles</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
               @endcan
@@ -325,6 +422,7 @@
                 ">
                   <i class="fas fa-users-cog"></i>
                   <p>Usuarios</p>
+                  <span class="right badge badge-success">Nuevo</span>
                 </a>
               </li>
               @endcan

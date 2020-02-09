@@ -34,7 +34,7 @@
       <div class="card card-solid card-default">
         <div class="card-header mailbox-controls">
           <h3 class="card-title"><i class="fas fa-list text-teal"></i> Listado pais</h3>
-          @can('pais.create')
+          @can('config.pais.create')
           <a href="{{ route('pais.create') }}" title="Crear nuevo registro" data-toggle="tooltip" data-placement="left" class="btn btn-default btn-sm elevation-1 float-right">&nbsp;&nbsp;<i class="fas fa-plus text-teal"></i>&nbsp;&nbsp;</a>
           @endcan
         </div>

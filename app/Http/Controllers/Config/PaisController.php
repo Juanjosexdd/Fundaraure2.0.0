@@ -50,7 +50,7 @@ class PaisController extends Controller
     {
         $pais = Pais::create($request->all());
 
-        return redirect()->route('config.pais.index')
+        return redirect()->route('pais.index')
             ->with('success', 'Pais guardado con éxito.');
     }
 

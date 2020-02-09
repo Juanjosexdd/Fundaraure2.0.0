@@ -13,12 +13,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Configuración</h1>
+       <h1 class="m-0 text-teal"><i class="nav-icon fas fa-cogs"></i> Configuración</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"> <a href="{{ route('home') }}">Inicio</a></li>
-          <li class="breadcrumb-item">Configuración</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('configuracion.index') }}">Configuración</a></li>
           <li class="breadcrumb-item active">Sector</a> </li>
         </ol>
       </div><!-- /.col -->
@@ -33,9 +33,9 @@
     <div class="col-xs-12">
       <div class="card card-solid card-default">
         <div class="card-header mailbox-controls">
-          <h3 class="card-title">Listado Sector</h3>
-          @can('sector.create')
-          <a class="btn bg-teal btn-xs float-right" title="Crea un nuevo registro" data-toggle="tooltip" data-placement="left" href="{{ route('sector.create')}}">&nbsp;&nbsp;<i class="fas fa-plus"></i>&nbsp;&nbsp;</a>
+          <h3 class="card-title"><i class="fas fa-list text-teal"></i> Listado sector</h3>
+          @can('config.sector.create')
+          <a href="{{ route('sector.create') }}" title="Crear nuevo registro" data-toggle="tooltip" data-placement="left" class="btn btn-default btn-sm elevation-1 float-right">&nbsp;&nbsp;<i class="fas fa-plus text-teal"></i>&nbsp;&nbsp;</a>
           @endcan
         </div>
         <!-- /.card-header -->

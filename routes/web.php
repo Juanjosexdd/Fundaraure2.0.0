@@ -28,24 +28,24 @@ Route::middleware(['auth'])->group(function(){
 	//Cargos
 	Route::resource('config/cargo', 'Config\CargoController');
 	//tipo clientes
-	Route::resource('tcliente', 'TipoclienteController');
+	Route::resource('config/tcliente', 'Config\TipoclienteController');
 	//pais
 	Route::resource('config/pais', 'Config\PaisController');
 	//estado
-	Route::resource('estado', 'EstadoController');
+	Route::resource('config/estado', 'Config\EstadoController');
 	//minicipio
-	Route::resource('municipio', 'MunicipioController');
+	Route::resource('config/municipio', 'Config\MunicipioController');
 	//parroquia
-	Route::resource('parroquia', 'ParroquiaController');
+	Route::resource('config/parroquia', 'Config\ParroquiaController');
 	//sector
-	Route::resource('sector', 'SectorController');
+	Route::resource('config/sector', 'Config\SectorController');
 	//cliente
-	Route::resource('cliente', 'ClienteController');
+	Route::resource('facturacion/cliente', 'Facturacion\ClienteController');
 	Route::resource('configuracion', 'ConfiguracionController');
 	Route::resource('factura', 'EncabezadofacturaController');
-	Route::resource('efactura', 'EstatusfacturaController');
-	Route::resource('fpago', 'FormapagofacturaController');
-	Route::resource('servicio', 'ServiciofacturaController');
+	Route::resource('facturacion/efactura', 'Facturacion\EstatusfacturaController');
+	Route::resource('facturacion/fpago', 'Facturacion\FormapagoController');
+	Route::resource('facturacion/servicio', 'Facturacion\ServicioController');
 	//Users
 	Route::get('config/users', 'Config\UserController@index')->name('config.users.index')
 		->middleware('can:config.users.index');
@@ -107,10 +107,10 @@ Route::get('role', function(){
 		->toJson();
 });
 
-Route::get('listadoclientes', function(){
+Route::get('listadotclientes', function(){
 	return datatables()
 		->eloquent(App\Tipocliente::query()->orderBy('id', 'desc'))
-		->addColumn('botones','tcliente.actions')
+		->addColumn('botones','config.tcliente.actions')
 		->rawColumns(['botones'])
 		->toJson();
 });
@@ -124,35 +124,35 @@ Route::get('listadopais', function(){
 Route::get('listadoestado', function(){
 	return datatables()
 		->eloquent(App\Estado::query()->orderBy('id', 'desc'))
-		->addColumn('botones','estado.actions')
+		->addColumn('botones','config.estado.actions')
 		->rawColumns(['botones'])
 		->toJson();
 });
 Route::get('listadomunicipio', function(){
 	return datatables()
 		->eloquent(App\Municipio::query()->orderBy('id', 'desc'))
-		->addColumn('botones','municipio.actions')
+		->addColumn('botones','config.municipio.actions')
 		->rawColumns(['botones'])
 		->toJson();
 });
 Route::get('listadoparroquia', function(){
 	return datatables()
 		->eloquent(App\Parroquia::query()->orderBy('id', 'desc'))
-		->addColumn('botones','parroquia.actions')
+		->addColumn('botones','config.parroquia.actions')
 		->rawColumns(['botones'])
 		->toJson();
 });
 Route::get('listadosector', function(){
 	return datatables()
 		->eloquent(App\Sector::query()->orderBy('id', 'desc'))
-		->addColumn('botones','sector.actions')
+		->addColumn('botones','config.sector.actions')
 		->rawColumns(['botones'])
 		->toJson();
 });
 Route::get('listadocliente', function(){
 	return datatables()
 		->eloquent(App\Cliente::query()->orderBy('id', 'desc'))
-		->addColumn('botones','cliente.actions')
+		->addColumn('botones','facturacion.cliente.actions')
 		->rawColumns(['botones'])
 		->toJson();
 });
@@ -167,6 +167,27 @@ Route::get('departamento', function(){
 	return datatables()
 		->eloquent(App\Departamento::query()->orderBy('id', 'desc'))
 		->addColumn('botones','config.dpto.actions')
+		->rawColumns(['botones'])
+		->toJson();
+});
+Route::get('listadoefactura', function(){
+	return datatables()
+		->eloquent(App\Estatusfactura::query()->orderBy('id', 'desc'))
+		->addColumn('botones','facturacion.efactura.actions')
+		->rawColumns(['botones'])
+		->toJson();
+});
+Route::get('listadoservicio', function(){
+	return datatables()
+		->eloquent(App\Servicio::query()->orderBy('id', 'desc'))
+		->addColumn('botones','facturacion.servicio.actions')
+		->rawColumns(['botones'])
+		->toJson();
+});
+Route::get('listadofpagos', function(){
+	return datatables()
+		->eloquent(App\Formapago::query()->orderBy('id', 'desc'))
+		->addColumn('botones','facturacion.fpago.actions')
 		->rawColumns(['botones'])
 		->toJson();
 });

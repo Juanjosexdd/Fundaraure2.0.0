@@ -11,18 +11,18 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Configuración</h1>
-      </div>
+       <h1 class="m-0 text-teal"><i class="nav-icon fas fa-cogs"></i> Configuración</h1>
+      </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-          <li class="breadcrumb-item">Configuración</a></li>
-          <li class="breadcrumb-item active"><a href="{{ route('estado.index') }}">Estados</a> </li>
+          <li class="breadcrumb-item"><a href="{{ route('configuracion.index') }}">Configuración</a></li>
+          <li class="breadcrumb-item active"><a href="{{ route('estado.index') }}">Estado</a> </li>
           <li class="breadcrumb-item active">Editar</a> </li>
         </ol>
-      </div>
-    </div>
-  </div>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
 @endsection
 
@@ -32,16 +32,14 @@
     <div class="col-xs-12">
       <div class="card card-solid card-default">
         <div class="card-header with-border mailbox-controls">
-          <h2 class="card-title"> <i class="fa fa-edit text-warning"></i> Editar datos {{$estado->nombre}}</h2>
-          <div class="btn-group float-right">
-            <a href="{{ route('estado.index') }}" title="Volver" data-toggle="tooltip" data-placement="left" class="btn btn-default btn-sm"><i class="fas fa-reply text-info"></i></a>
-          </div>
+          <h2 class="card-title"> <i class="fa fa-edit text-warning"></i> Editar datos de {{$estado->nombre}}</h2>
+          <a href="{{ route('estado.index') }}" title="Volver" data-toggle="tooltip" data-placement="left" class="btn btn-default btn-sm elevation-1 float-right">&nbsp;&nbsp;<i class="fas fa-reply text-teal"></i>&nbsp;&nbsp;</a>
         </div>
         <div class="card-body">
-          <div class="col-md-8 offset-2">
+          <div class="col-md-12">
             {!! Form::model($estado, ['route' => ['estado.update', $estado->id],'method' => 'PUT', 'files' => true])!!}
               @method('PUT')
-              @include('estado.partials.form',['btnText'=>'Enviar'])
+              @include('config.estado.partials.form',['btnText'=>'Enviar'])
             {!! Form::close() !!}
           </div>
         </div>

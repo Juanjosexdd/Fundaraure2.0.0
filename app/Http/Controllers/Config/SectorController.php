@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Config;
 
-use App\Http\Controllers\Controller;
+use App\Sector;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SectorRequest;
+use App\Parroquia;
+
 
 class SectorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:config.sector.create')->only(['create', 'store']);
+        $this->middleware('can:config.sector.index')->only(['index']);
+        $this->middleware('can:config.sector.edit')->only(['edit', 'update']);
+        $this->middleware('can:config.sector.show')->only(['show']);
+        $this->middleware('can:config.sector.destroy')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,7 @@ class SectorController extends Controller
      */
     public function index()
     {
-        //
+        return view('config.sector.index');
     }
 
     /**
@@ -24,7 +36,12 @@ class SectorController extends Controller
      */
     public function create()
     {
-        //
+        $parroquia = Parroquia::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+
+        return view('config.sector.create', compact('parroquia'),[
+            'sector' => new Sector
+
+        ]);
     }
 
     /**
@@ -33,53 +50,54 @@ class SectorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SectorRequest $request)
     {
-        //
-    }
+        $sector = Sector::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('sector.index')
+            ->with('success', 'Sector guardado con éxito.');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $parroquia = Parroquia::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        $sector = Sector::find($id);
+
+        return view('config.sector.edit', compact('sector','parroquia'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SectorRequest $request, $id)
     {
-        //
+        $sector = Sector::find($id);
+
+        $sector->fill($request->all())->save();
+
+        return redirect()->route('sector.index')
+            ->with('success', 'Sector actualizado con éxito');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $sector = Sector::find($id)->delete();
+        return back()->with('success', 'Sector eliminado con exito');
     }
 }
